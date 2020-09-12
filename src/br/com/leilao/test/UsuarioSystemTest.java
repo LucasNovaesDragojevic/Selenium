@@ -22,11 +22,13 @@ public class UsuarioSystemTest {
 	@Before
 	public void iniciaMetodo() {
 		driver = new ChromeDriver();
+		driver.get("http://localhost:8080/apenas-teste/limpa");
 		usuariosPage = new UsuariosPage(driver);
 	}
 	
 	@After
 	public void terminaMetodo() {
+		driver.get("http://localhost:8080/apenas-teste/limpa");
 		driver.close();
 	}
 	
@@ -55,6 +57,14 @@ public class UsuarioSystemTest {
 	public void deveExcluirUsuario() {
 		usuariosPage.visita();
 		usuariosPage.novo().cadastra("Jandira", "jandira@email.com");
-		usuariosPage.deletaUsuariosNaPosicao(0);
+		usuariosPage.deletaUsuariosNaPosicao(1);
+	}
+	
+	@Test 
+	public void deveEditarUsuario() {
+		usuariosPage.visita();
+		usuariosPage.novo().cadastra("Jandira", "jandira@email.com");
+		usuariosPage.editaPorPosicao(1).altera("Jucimara", "jucimara@email.com");
+		assertTrue(usuariosPage.existeNaListagem("Jucimara", "jucimara@email.com"));
 	}
 }

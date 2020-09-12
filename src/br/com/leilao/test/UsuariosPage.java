@@ -30,8 +30,13 @@ public class UsuariosPage {
 	}
 	
 	void deletaUsuariosNaPosicao(Integer posicao) {
-		driver.findElements(By.tagName("button")).get(posicao).click();
+		driver.findElements(By.tagName("button")).get(posicao - 1).click();
 		Alert alert = driver.switchTo().alert();
 		alert.accept();
+	}
+
+	AlteraUsuarioPage editaPorPosicao(Integer posicao) {
+		driver.findElements(By.linkText("editar")).get(posicao - 1).click();
+		return new AlteraUsuarioPage(driver);
 	}
 }
