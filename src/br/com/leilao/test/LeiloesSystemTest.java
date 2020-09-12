@@ -30,7 +30,7 @@ public class LeiloesSystemTest {
 	
 	@After
 	public void terminaMetodo() {
-		driver.get("http://localhost:8080/apenas-teste/limpa");
+		driver.get(new UrlAplicacao().getUrlBase() + "/apenas-teste/limpa");
 		driver.close();
 	}
 	

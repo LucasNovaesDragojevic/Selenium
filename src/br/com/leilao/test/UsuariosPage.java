@@ -13,7 +13,7 @@ public class UsuariosPage {
 	}
 	
 	void visita() {
-		driver.get("http://localhost:8080/usuarios");
+		driver.get(new UrlAplicacao().getUrlBase() + "/usuarios");
 	}
 	
 	NovoUsuarioPage novo() {

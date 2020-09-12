@@ -15,7 +15,7 @@ public class LeiloesPage {
 	}
 	
 	void visita() {
-		driver.get("http://localhost:8080/leiloes");
+		driver.get(new UrlAplicacao().getUrlBase() + "/leiloes");
 	}
 	
 	NovoLeilaoPage novo() {
