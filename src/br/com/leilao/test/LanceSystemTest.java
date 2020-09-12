@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class LeiloesSystemTest {
+public class LanceSystemTest {
 
 	private WebDriver driver;
 	private LeiloesPage leiloesPage;
@@ -23,9 +23,15 @@ public class LeiloesSystemTest {
 	public void iniciaMetodo() {
 		driver = new ChromeDriver();
 		leiloesPage = new LeiloesPage(driver);
+		
 		UsuariosPage usuariosPage = new UsuariosPage(driver);
 		usuariosPage.visita();
-		usuariosPage.novo().cadastra("Ruberval", "ruberval@email.com");
+		usuariosPage.novo().cadastra("Matilda", "matilda@email.com");
+		usuariosPage.novo().cadastra("Tobias", "tobias@email.com");
+		
+		LeiloesPage leiloesPage = new LeiloesPage(driver);
+		leiloesPage.visita();
+		leiloesPage.novo().preenche("RTX 2060", 2000.00, "Matilda", true);
 	}
 	
 	@After
@@ -35,18 +41,9 @@ public class LeiloesSystemTest {
 	}
 	
 	@Test
-	public void deveCadastrarUmLeilao() {
-		leiloesPage.visita();
-		leiloesPage.novo().preenche("RTX 2060", 2500.00, "Ruberval", true);
-		assertTrue(leiloesPage.existe("RTX 2060", 2500.00, "Ruberval", true));
-	}
-	
-	@Test
-	public void deveExigirCamposFaltantes() {
-		leiloesPage.visita();
-		NovoLeilaoPage novoLeilaoPage = leiloesPage.novo();
-		novoLeilaoPage.preenche("", 0.0, "Ruberval", true);
-		assertTrue(novoLeilaoPage.exibeMensagemDeCampoObrigatorio("Nome obrigatorio!"));
-		assertTrue(novoLeilaoPage.exibeMensagemDeCampoObrigatorio("Valor inicial deve ser maior que zero!"));
+	public void deveFazerUmLance() {
+		DetalhesLeilaoPage detalhesLeilaoPage = leiloesPage.detalhes(1);
+		detalhesLeilaoPage.lance("Tobias", 2010.00);
+		assertTrue(detalhesLeilaoPage.existeLance("Tobias", 2010.00));
 	}
 }

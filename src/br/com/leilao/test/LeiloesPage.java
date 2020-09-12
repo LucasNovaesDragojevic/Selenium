@@ -1,7 +1,10 @@
 package br.com.leilao.test;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class LeiloesPage {
 
@@ -25,5 +28,11 @@ public class LeiloesPage {
 				driver.getPageSource().contains(String.valueOf(valor)) &&
 				driver.getPageSource().contains(usuario) &&
 				driver.getPageSource().contains(usado ? "Sim" : "Não");
+	}
+
+	DetalhesLeilaoPage detalhes(Integer posicao) {
+		List<WebElement> elements = driver.findElements(By.linkText("exibir"));
+		elements.get(posicao - 1).click();
+		return new DetalhesLeilaoPage(driver);
 	}
 }

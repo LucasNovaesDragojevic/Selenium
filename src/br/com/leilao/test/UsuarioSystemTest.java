@@ -22,7 +22,6 @@ public class UsuarioSystemTest {
 	@Before
 	public void iniciaMetodo() {
 		driver = new ChromeDriver();
-		driver.get("http://localhost:8080/apenas-teste/limpa");
 		usuariosPage = new UsuariosPage(driver);
 	}
 	
