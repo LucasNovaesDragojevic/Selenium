@@ -24,14 +24,9 @@ public class LanceSystemTest {
 		driver = new ChromeDriver();
 		leiloesPage = new LeiloesPage(driver);
 		
-		UsuariosPage usuariosPage = new UsuariosPage(driver);
-		usuariosPage.visita();
-		usuariosPage.novo().cadastra("Matilda", "matilda@email.com");
-		usuariosPage.novo().cadastra("Tobias", "tobias@email.com");
-		
-		LeiloesPage leiloesPage = new LeiloesPage(driver);
-		leiloesPage.visita();
-		leiloesPage.novo().preenche("RTX 2060", 2000.00, "Matilda", true);
+		new CriadorCenarios(driver).umUsuario("Matilda", "matilda@email.com")
+									.umUsuario("Tobias", "tobias@email.com")
+									.umLeilao( "Matilda", "RTX 2060", 2000.00, true);
 	}
 	
 	@After
